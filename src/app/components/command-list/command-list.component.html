@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-11">
+      <table class="table" >
+        <thead class="table">
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Unit price</th>
+        <th scope="col">Total price</th>
+        <th scope="col">Quantity</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of orders; index as i">
+          <td><b>{{i}}</b></td>
+          <td>{{order.productName}}</td>
+          <td>{{order.unitPrice}}</td>
+          <td>{{order.quantity}}</td>
+          <td>{{order.totalPrice}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

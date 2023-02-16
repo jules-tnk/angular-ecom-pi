@@ -1,0 +1,70 @@
+<div class="container mt-5" [ngStyle]="{'display':containerDisplayStyle}">
+  <div class="row">
+    <div class="col-sm-11">
+      <table class="table" >
+        <thead class="table">
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Unit price</th>
+        <th scope="col">Total price</th>
+        <th scope="col">Quantity</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of cart; index as i">
+          <td><b>{{i}}</b></td>
+          <td>{{order.product.name}}</td>
+          <td>{{order.product.price}}</td>
+          <td><input type="number" class="form-control w-50"
+                     [(ngModel)]="order.quantity"
+                     (ngModelChange)="order.quantity = $event; saveModificationToCart()">
+          </td>
+          <td>{{order.product.price * order.quantity}}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-right"><b>Total</b></td>
+          <td><b>{{getTotalPrice()}}</b></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="text-center"><button class="btn btn-danger" (click)="clearCart()">Clear cart</button></td>
+          <td colspan="3" class="text-center">
+            <button class="btn btn-primary" (click)="openPopup()">Validate order</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{'display':modalDisplayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Validate your order ?</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getTotalQuantity()}} products</p>
+        <hr>
+        <p>Total: {{getTotalPrice()}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger"
+                (click)="closePopup()">
+          Cancel
+        </button>
+
+        <button type="button" class="btn btn-success"
+                (click)="validateOrder()">
+          Validate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
